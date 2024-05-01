@@ -1,14 +1,13 @@
 <?php
 
 include "inc/user.php";
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["username"])) {
     header("Location: login.php");
     exit;
 }
 if (isset($_POST["logout"])) {
     logout();
 }
-
 include "html/header.php";
 ?>
 <link rel="stylesheet" href="css/style.css">
@@ -33,25 +32,31 @@ include "html/header2.php";
             <a href="#">
                 <span class="material-symbols-sharp">grid_view </span>
                 <h3>Dashbord</h3>
-            </a>
-            <a href="add-user.php" class="active">
-                <span class="material-symbols-sharp">person_outline </span>
-                <h3>USERS</h3>
-            </a>
+            </a><?php
+            if (isset($_SESSION["user"]) && $_SESSION["user"] == "manager") {
+                ?>
+                <a href="add-user.php">
+                    <span class="material-symbols-sharp">person_outline </span>
+                    <h3>USERS</h3>
+                </a>
+                <?php
+            }
+            ?>
+
             <a href="add-product.php">
                 <span class="material-symbols-sharp">receipt_long </span>
                 <h3>Products</h3>
+            </a>
+            <a href="news.php">
+                <span class="material-symbols-sharp">feed </span>
+                <h3>news</h3>
             </a>
             <a href="#">
                 <span class="material-symbols-sharp">settings </span>
                 <h3>settings</h3>
             </a>
-
-            <span class="material-symbols-sharp">add </span>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                add product
-            </button>
+
 
             <a href="logout.php">
                 <span class="material-symbols-sharp">logout </span>

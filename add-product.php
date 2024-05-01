@@ -1,8 +1,7 @@
 <?php
 
 include "inc/product.php";
-
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["username"])) {
     header("Location: login.php");
     exit;
 }
@@ -57,14 +56,20 @@ include "html/nav.php";
                             $products = getAllData("storage/products.json");
                             foreach ($products as $product): ?>
                                 <tr>
-                                    <th scope="row"><?= $product["id"] ?></th>
+                                    <td scope="row"><?= $product["id"] ?></td>
                                     <td><?= $product["productName"] ?></td>
                                     <td><?= $product["price"] ?> QR</td>
                                     <td><?= $product["quantity"] ?> M2</td>
                                     <td><?= $product["country"] ?></td>
                                     <td>
-                                        <form action="" method="get"><input type="submit" value="delete"
-                                                name="delete<?= $user["id"] ?>"></form>
+                                        <a href="add-product.php?viewID=<?= $product['id'] ?>"
+                                            class="btn btn-sm btn-info">view</a>
+                                        <a href="add-product.php?updateID=<?= $product['id'] ?>"
+                                            class="btn btn-sm btn-dark">update</a>
+                                        <a href="add-product.php?deleteID=<?= $product['id'] ?>"
+                                            class="btn btn-sm btn-danger">delete</a>
+                                        <!-- <form action="" method="get"><input type="submit" value="delete"
+                                                name="delete //$user["id"] "></form> -->
                                     </td>
                                     <?php
                                     //  if (isset($_GET["delete" . $user['id']])) {
@@ -74,7 +79,14 @@ include "html/nav.php";
                                 </tr>
                             <?php endforeach;
                             ?>
+
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5"> total products</td>
+                                <td> <?= getLastId("storage/products.json") ?></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

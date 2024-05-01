@@ -1,50 +1,65 @@
-{
-    "0": {
+[
+    {
         "id": 1,
         "username": "root",
         "email": "root@gmail.com",
-        "password": "$2y$10$FjqGUXXNtb.qum9c8ZJ/JO0nnaDDfg/MsXNlZtl928mGVJwfeetOe"
+        "password": "$2y$10$FjqGUXXNtb.qum9c8ZJ\/JO0nnaDDfg\/MsXNlZtl928mGVJwfeetOe",
+        "user": "manager"
     },
-    "1": {
+    {
         "id": 2,
         "username": "salah",
         "email": "mecg@gmail.com",
-        "password": "$2y$10$TRjnMMzL64J\/nBfMqUgDuO5KkweVCm2hLb9UcMW.kws7vehCA3mm2"
+        "password": "$2y$10$TRjnMMzL64J\/nBfMqUgDuO5KkweVCm2hLb9UcMW.kws7vehCA3mm2",
+        "user": "admin"
     },
-    "2": {
+    {
         "id": 3,
         "username": "test",
         "email": "mbc@gmail.com",
-        "password": "$2y$10$TRjnMMzL64J\/nBfMqUgDuO5KkweVCm2hLb9UcMW.kws7vehCA3mm2"
+        "password": "$2y$10$TRjnMMzL64J\/nBfMqUgDuO5KkweVCm2hLb9UcMW.kws7vehCA3mm2",
+        "user": "admin"
     },
-    "3": {
+    {
         "id": 4,
         "username": "aliali",
         "email": "aliabdulbaqi@gmail.com",
-        "password": "$2y$10$p9CkOIVQqd4sVPfJ0s4xg.ECfM6OfbQjioeVqXA2hjdknXfY2fnJy"
+        "password": "$2y$10$p9CkOIVQqd4sVPfJ0s4xg.ECfM6OfbQjioeVqXA2hjdknXfY2fnJy",
+        "user": "admin"
     },
-    "4": {
+    {
         "id": 5,
         "username": "aliali22099",
         "email": "aliabdulbaqi05@gmail.com",
-        "password": "$2y$10$x\/6Xk6sY6I8mHWNu10icr.Fv6s9L5aZYSibv8h6vn9NlFnrTMjNPG"
+        "password": "$2y$10$x\/6Xk6sY6I8mHWNu10icr.Fv6s9L5aZYSibv8h6vn9NlFnrTMjNPG",
+        "user": "admin"
     },
-    "5": {
+    {
         "id": 6,
         "username": "aliali22",
         "email": "fdhksllka@gmail.com",
-        "password": "$2y$10$UYVI7HSgzmVaGu5LHTZS9uXX8GJnmfyl3PQhusQNvxGCTf8k9GNsi"
+        "password": "$2y$10$UYVI7HSgzmVaGu5LHTZS9uXX8GJnmfyl3PQhusQNvxGCTf8k9GNsi",
+        "user": "admin"
     },
-    "6": {
+    {
         "id": 7,
         "username": "aliali2",
         "email": "aliabdulbaqiali5@gmail.com",
-        "password": "$2y$10$952mZzYhOsMI1qmlL4pNOuqzEMxizJVAEUqztgIRFpyovoqj.jX96"
+        "password": "$2y$10$952mZzYhOsMI1qmlL4pNOuqzEMxizJVAEUqztgIRFpyovoqj.jX96",
+        "user": "admin"
     },
-    "7": {
+    {
         "id": 8,
         "username": "slaj",
         "email": "aliabdulbaqi05@gmail.com",
-        "password": "$2y$10$.aGgcI85v7ET0GrjPGIvtOu4KO3.ycEyjzRcfTZ1KSYZELwMyJU8."
+        "password": "$2y$10$.aGgcI85v7ET0GrjPGIvtOu4KO3.ycEyjzRcfTZ1KSYZELwMyJU8.",
+        "user": "admin"
+    },
+    {
+        "id": 9,
+        "username": "aliabdulbaqi05",
+        "email": "aliabdulbaqiali5gg@gmail.com",
+        "password": "$2y$10$fwaIyLWlnLFWV\/HIwXSH8ubF4AgTHW75RY8CSIKrKjUrRJvFovDKa",
+        "user": "admin"
     }
-}
+]

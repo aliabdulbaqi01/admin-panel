@@ -26,7 +26,8 @@ function isUserExist($username)
     }
     return false;
 }
-function isEmailExist($email) {
+function isEmailExist($email)
+{
     $users = getAllData("storage/users.json");
 
     foreach ($users as $user) {
@@ -56,7 +57,7 @@ function isEmailExist($email) {
 //             if(!validPassword($password))  {
 //                 header("location: register.php?error=invalidpass");
 //                 exit;
-                
+
 //             }
 //             else {
 //                 if ($password !== $coPassword) {
@@ -78,24 +79,26 @@ function clearInput($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-function addUser($username, $email, $password) {
+function addUser($username, $email, $password)
+{
     $username = clearInput($username);
     $email = clearInput($email);
     $password = clearInput($password);
     $users = getAllData("storage/users.json");
-$id = getLastId("storage/users.json") + 1;
-$password = password_hash($password, PASSWORD_DEFAULT);
-$users[] = ["id" => $id, "username" => $username, "email" => $email, "password" => $password];
-file_put_contents("storage/users.json",json_encode($users, JSON_PRETTY_PRINT));
-$news = $username . " has been register successfully ";
-addNews($news);
+    $id = getLastId("storage/users.json") + 1;
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $users[] = ["id" => $id, "username" => $username, "email" => $email, "password" => $password, "user" => "admin"];
+    file_put_contents("storage/users.json", json_encode($users, JSON_PRETTY_PRINT));
+    $news = $username . " has been register successfully ";
+    addNews($news);
 }
 function login($username, $password)
 {
     if (isUserExist($username)) {
         $user = getUserData($username);
         if (password_verify($password, $user["password"])) {
-            $_SESSION['user'] = "username";
+            $_SESSION['username'] = $username;
+            $_SESSION['user'] = $user["user"];
             $news = $username . " is login";
             addNews($news);
             return true;
@@ -116,7 +119,7 @@ function logout()
 }
 
 
-function deleteUser($id,$users)
+function deleteUser($id, $users)
 {
     unset($users[$id - 1]);
     $news = " user " . $id . " has been deleted by " . $_SESSION["user"];

@@ -1,14 +1,17 @@
 <?php
 include "inc/verify.php";
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["username"])) {
     header("Location: login.php");
     exit;
+} elseif (isset($_SESSION["user"]) && $_SESSION["user"] != "manager") {
+    header("Location: index.php");
+    exit;
 }
-include "header.php";
+include "html/header.php";
 ?>
 
-<?php 
-include "header2.php";
+<?php
+include "html/header2.php";
 ?>
 <!-- button -->
 <div class="container mt-5">
@@ -39,8 +42,14 @@ include "header2.php";
                                     <td><?= $user["username"] ?></td>
                                     <td><?= $user["email"] ?></td>
                                     <td>
-                                        <form action="" method="get"><input type="submit" value="delete"
-                                                name="delete<?= $user["id"] ?>"></form>
+                                        <a href="add-user.php?viewID=<?= $user['id'] ?>"
+                                            class="btn btn-sm btn-info">view</a>
+                                        <a href="add-user.php?updateID=<?= $user['id'] ?>"
+                                            class="btn btn-sm btn-dark">update</a>
+                                        <a href="add-user.php?deleteID=<?= $user['id'] ?>"
+                                            class="btn btn-sm btn-danger">delete</a>
+                                        <!-- <form action="" method="get"><input type="submit" value="delete"
+                                                name="delete //$user["id"] "></form> -->
                                     </td>
                                     <?php if (isset($_GET["delete" . $user['id']])) {
                                         deleteUser($user['id'], $users);
@@ -49,6 +58,12 @@ include "header2.php";
                             <?php endforeach;
                             ?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5"> total users</td>
+                                <td> <?= getLastId("storage/users.json") ?></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
