@@ -1,9 +1,6 @@
 <?php
-include "inc/verify.php";
-if (isset($_SESSION["user"])) {
-    header("Location: index.php");
-    exit;
-}
+include "inc/user.php";
+include "inc/to-in.php";
 $nameErr = $emailErr = $repasswordErr = $passwordErr = "";
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
@@ -23,10 +20,7 @@ if (isset($_POST['username'])) {
 }
 include "html/header.php";
 ?>
-<link rel="stylesheet" href="css/form.css">
-<?php
-include "html/header2.php";
-?>
+
 
 
 <div class="form-box">

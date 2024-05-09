@@ -1,11 +1,9 @@
 <?php
 include "inc/parent.php";
+include "inc/to-out.php";
 include "html/header.php";
 ?>
-<?php
-include "html/header2.php";
-include "html/nav.php";
-?>
+
 <div class="container mt-5">
     <?php
     $news = getAllData("storage/news.json");

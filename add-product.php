@@ -1,10 +1,7 @@
 <?php
 
 include "inc/product.php";
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit;
-}
+include "inc/to-out.php";
 $error = "";
 if (isset($_POST["productName"])) {
     $name = $_POST['productname'];
@@ -19,12 +16,6 @@ if (isset($_POST["productName"])) {
 }
 include "html/header.php";
 ?>
-<link rel="stylesheet" href="css/page.css">
-<?php
-
-include "html/header2.php";
-include "html/nav.php";
-?>
 
 
 <!-- button -->
@@ -33,7 +24,7 @@ include "html/nav.php";
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">add
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">add
                         Products</button>
                     <span><?= @$error ?></span>
                 </div>

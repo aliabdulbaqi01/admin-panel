@@ -1,77 +1,22 @@
 <?php
 
-include "parent.php";
+include "inc/verify.php";
 
-
-function getUserData($username)
+// function that return the user and its data;
+function getUser($username)
 {
-    $users = getAllData("storage/users.json");
-
-    foreach ($users as $user) {
-        if ($user["username"] == $username) {
-            return $user;
+    $allData = getAllData("storage/users.json");
+    foreach ($allData as $one) {
+        if ($one['username'] == $username) {
+            return $one;
+        } else {
+            return false;
         }
     }
-    return false;
 }
 
-function isUserExist($username)
-{
-    $users = getAllData("storage/users.json");
 
-    foreach ($users as $user) {
-        if ($user["username"] == $username) {
-            return true;
-        }
-    }
-    return false;
-}
-function isEmailExist($email)
-{
-    $users = getAllData("storage/users.json");
-
-    foreach ($users as $user) {
-        if ($user["email"] == $email) {
-            return true;
-        }
-    }
-    return false;
-}
-
-// function register($username, $email, $password, $coPassword) {
-//     $username= testInput($username);
-//     $email= testInput($email);
-//     $password= testInput($password);
-//     $password= testInput($coPassword);
-// $users = getAllData("storage/users.json");
-// if (isUserExist($username) && empty($username)) {
-//     header("location: register.php?error=userexist");
-//     exit;
-// }
-// else {
-//     if(isEmailExist($email)) {
-//         header("location: register.php?error=emailexist");
-//             exit;
-//         }
-//         else {
-//             if(!validPassword($password))  {
-//                 header("location: register.php?error=invalidpass");
-//                 exit;
-
-//             }
-//             else {
-//                 if ($password !== $coPassword) {
-//                     header("location: register.php?error=passnotequal");
-//                 exit;
-//                 }
-//                 else {
-//                     header("location: login.php");
-//                 }
-//             }  
-//         }
-// }
-
-// }
+// script to crlear input from spaces html special chartacter
 function clearInput($data)
 {
     $data = trim($data);
@@ -79,7 +24,9 @@ function clearInput($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-function addUser($username, $email, $password)
+
+// script to add user or register
+function addUser($username, $email, $password, $user = "admin")
 {
     $username = clearInput($username);
     $email = clearInput($email);
@@ -87,29 +34,33 @@ function addUser($username, $email, $password)
     $users = getAllData("storage/users.json");
     $id = getLastId("storage/users.json") + 1;
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $users[] = ["id" => $id, "username" => $username, "email" => $email, "password" => $password, "user" => "admin"];
+    $users[] = ["id" => $id, "username" => $username, "email" => $email, "password" => $password, "user" => $user];
     file_put_contents("storage/users.json", json_encode($users, JSON_PRETTY_PRINT));
     $news = $username . " has been register successfully ";
     addNews($news);
 }
-function login($username, $password)
+
+// fucntion to login
+function loginUser($username, $password)
 {
     if (isUserExist($username)) {
-        $user = getUserData($username);
-        if (password_verify($password, $user["password"])) {
+        $user = getUser($username);
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user'] = $user['user'];
             $_SESSION['username'] = $username;
-            $_SESSION['user'] = $user["user"];
             $news = $username . " is login";
             addNews($news);
             return true;
         } else {
-            return "password";
+            return "password is wrong";
         }
     } else {
         return false;
     }
 }
 
+
+// script to logout 
 function logout()
 {
     session_start();
@@ -118,7 +69,7 @@ function logout()
     header("location:index.php");
 }
 
-
+// script to delete user from the storage
 function deleteUser($id, $users)
 {
     unset($users[$id - 1]);
@@ -126,3 +77,43 @@ function deleteUser($id, $users)
     addNews($news);
     file_put_contents("storage/users.json", json_encode($users, JSON_PRETTY_PRINT));
 }
+
+
+// script to update user data from the storages
+function updateUser($username, $emeil, $password)
+{
+    $news = $username . " has been register successfully ";
+    addNews($news);
+    return true;
+}
+
+// reset your password
+function resetPassword($password, $coPassword)
+{
+    $theUser = getUser($_SESSION['username']);
+    if (validPassword($password)) {
+        if ($password == $coPassword) {
+            $theUser['password'] = password_hash($password, PASSWORD_DEFAULT);
+            return true;
+        }
+    }
+    return false;
+}
+
+function setManager($username)
+{
+    if (isUserExist($username)) {
+        $user = getUser($username);
+        $user = $user['user'];
+        if ($user == "manager") {
+            return false;
+        }
+
+        $user['user'] = "manager";
+        return true;
+
+    }
+
+    return false;
+}
+

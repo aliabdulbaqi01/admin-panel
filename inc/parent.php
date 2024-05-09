@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 // to check for id;
 function isExist($id, $existId, $file)
@@ -11,11 +11,14 @@ function isExist($id, $existId, $file)
     }
     return false;
 }
+// function to get all Data as array
 function getAllData($file)
 {
     $allData = json_decode(file_get_contents($file), true);
     return $allData;
 }
+
+
 // script to get the last id in the storage
 function getLastId($file)
 {

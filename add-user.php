@@ -1,17 +1,12 @@
 <?php
 include "inc/verify.php";
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit;
-} elseif (isset($_SESSION["user"]) && $_SESSION["user"] != "manager") {
+include "inc/to-out.php";
+
+if (isset($_SESSION["user"]) && $_SESSION["user"] != "manager") {
     header("Location: index.php");
     exit;
 }
 include "html/header.php";
-?>
-
-<?php
-include "html/header2.php";
 ?>
 <!-- button -->
 <div class="container mt-5">

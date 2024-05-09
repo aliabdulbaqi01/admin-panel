@@ -63,13 +63,14 @@ body{
    overflow-x: hidden;
    background: var(--clr-color-background);
    font-family: 'Poppins', sans-serif;
+   color:#527961;
 }
 
-.container  {
+.contain  {
   display: grid;
   width: 96%;
   gap: 1.8rem;
-  grid-template-columns: 14rem auto 16rem;
+  grid-template-columns: 14rem auto 1rem;
   margin: 0 auto;
 }
 
@@ -95,12 +96,6 @@ h5{
 }
 small{
   font-size: 0.75rem;
-}
-.profile-photo img{
-  width: 2.8rem;
-  height: 2.8rem;
-  overflow: hidden;
-  border-radius: 50%;
 }
 .text-muted{
   color: var(--clr-info-dark);
@@ -130,7 +125,7 @@ b{
 
 /* aside */
  aside{
-  height: 100vh;
+  height: 80%;
  }
  aside .top{
   background: var(--clr-white);
@@ -386,61 +381,6 @@ main .recent_order a{
 }
 
 
-/*********************
-Right Side
-**********************/
-
-.right{
-  margin-top: 1.4rem;
-}
-.right h2{
-  color: var(--clr-dark);
-}
-.right .top{
-  display: flex;
-  justify-content: start;
-  gap: 2rem;
-}
-
-.right .top button{
-  display: none;
-}
-
-.right .theme-toggler{
-  background: var(--clr-white);
-  display: flex;
-  justify-content: space-between;
-  height: 1.6rem;
-  width: 4.2rem;
-  cursor: pointer;
-  border-radius: var(--border-radius-1);
-}
-.right .theme-toggler span{
-  font-size: 1.2rem;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.right .theme-toggler span.active{
-  background: var(--clr-primary);
-  color: #fff;
-}
-
-
-.right .top .profile{
-  display: flex;
-  gap: 2rem;
-  text-align: right;
-}
-.right  .info h3{
-  color: var(--clr-dark);
-}
-.right  .item h3{
-  color: var(--clr-dark);
-}
 
 /* recent update */
 
@@ -466,217 +406,3 @@ Right Side
 }
 
 
-/* see analytics */
-
-.right .sales-analytics{
-  margin-top: 2rem;
-}
-.right .sales-analytics h2{
-  margin-bottom: 0.8rem;
-}
-.right .sales-analytics .item{
-  background-color: var(--clr-white);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin: 10px 0;
-  width: 100%;
-  margin-bottom: 0.8rem;
-  padding: 1.4rem var(--card-padding);
-  border-radius: var(--border-radius-3);
-  box-shadow: var(--box-shadow);
-}
-.right .sales-analytics .item:hover{
-  box-shadow: none;
-}
-
-.right .sales-analytics .item .icon{
-  padding: 0.6rem;
-  color: var(--clr-white);
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
-  align-items: center;
-  background: coral;
-}
-.right .sales-analytics .item:nth-child(3) .icon
-{
-  background: var(--clr-success);
-}
-.right .sales-analytics .item:nth-child(4) .icon
-{
-  background: var(--clr-danger);
-}
-
-.right .sales-analytics .item .right{
-  margin-left: 15px;
-  display: flex;
-  justify-content: space-around;
-}
-.right .sales-analytics .item .right h3{
-  color: var(d);
-}
-
-
-.add_product div{
-  display: flex;
-  height: 60px;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  border: 2px dashed;
-  color: var(--clr-dark-variant);
-  margin-bottom: 40px;
-
-}
-
-
-
-
-/* **********8
-MEDIA QUERY
-****************/
-
-@media screen and (max-width:1200px) {
-    .container{
-      width: 94%;
-      grid-template-columns: 7rem auto 14rem;
-    }
-    aside .sidebar h3{
-      display: none;
-    }
-    aside .sidebar a{
-      width: 5.6rem;
-    }
-    aside .sidebar a:last-child{
-      position: relative;
-      margin-top: 1.8rem;
-    }
-    main .insights{
-      display: grid;
-      grid-template-columns: repeat(1,1fr);
-    }
-}
-
-/* ****************
-MEDIA QUERY PHONE
-************************/
-
-@media screen and (max-width:768px) {
-  .container{
-    width: 100%;
-    grid-template-columns: repeat(1,1fr);
-  
-  }
-  
-  aside{
-    position: fixed;
-    width: 18rem;
-    z-index: 3;
-    height: 100vh;
-    background-color: var(--clr-white);
-    display: none;
-    left: -110px;
-    animation:  menuLeft .3s ease forwards;
-  }
-  
-  @keyframes menuLeft {
-      to{
-        left: 0;
-      }
-  }
-  
-
-
-
-  aside .logo h2{
-       display: inline;
-  }
-  aside .sidebar h3{
-    display: inline;
-  }
-  aside .sidebar a{
-    width: 100%;
-    height: 3.4rem;
-  }
-  aside .top div.close  span{
-     display: inline;
-     position: absolute;
-     right: 0;
-     margin-right:30px;
-     font-size: 35px;
-     cursor: pointer;
-  }
-
-    .right .top{
-       position: fixed;
-       top: 0;
-       left: 0;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       padding: 0 0.8rem;
-       background: var(--clr-white);
-       height: 4.6rem;
-       width: 100%;
-       z-index: 2;
-       box-shadow: 0 1rem 1rem var(--clr-light);
-       margin: 0;
-    }
-
-
- main .insights{
-  display: grid;
-  grid-template-columns: repeat(1,1fr);
-  gap: 1.6rem;
-  padding: 40px;
- }
- main .recent_order{
-  padding: 30px;
-  margin: 0 auto;
- }
-
-
-
-  .right .profile{
-    position: absolute;
-    left: 70%;
-  }
-
-  .right .top .theme-toggler{
-    width: 4.4rem;
-    position: absolute;
-    left: 50%;
-  }
-   .right .profile .info{
-    display: none;
-   }
-
-   .right .top button{
-     display: inline-block;
-     background: transparent;
-     cursor: pointer;
-     color: var(--clr-dark);
-     position: absolute;
-     left: 1rem;
-
-   }
-   .right .recent_order{
-    padding: 0 30px;
-   }
-   .right .recent_updates{
-    padding: 0 40px;
-   }
-   .right .sales-analytics{
-    padding: 0 40px;
-   }
-   .right .add_product{
-    padding: 0 40px;
-    margin-bottom: 40px;
-   }
-
-
-}
