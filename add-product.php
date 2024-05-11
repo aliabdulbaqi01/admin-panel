@@ -1,19 +1,31 @@
 <?php
-
 include "inc/product.php";
 include "inc/to-out.php";
-$error = "";
+
 if (isset($_POST["productName"])) {
-    $name = $_POST['productname'];
+    $productName = $_POST['productName'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
-    $country = $_POST['country'];
-    if (addProduct($name, $price, $quantity, $country)) {
+    $country = ($_POST['country']) ? $_POST['country'] : "egypt";
+    if (validPrice($price) && validQuantity($quantity) && !isProductexist($productName)) {
+        addProduct($productName, $price, $quantity, $country);
         header("location: add-product.php");
-    } else {
-        $error = "something worng happens";
     }
+    if (isProductexist(($productName))) {
+        $productError = "product is exist";
+    }
+    if (!validPrice($price)) {
+        $priceError = "price must be more than 100 QR";
+    }
+    if (!validQuantity(!$quantity)) {
+        $quantityError = "the quantity should be more than 0";
+    }
+
 }
+if (isset($_POST['productId'])) {
+    echo $_POST['productID'];
+}
+
 include "html/header.php";
 ?>
 
@@ -24,9 +36,12 @@ include "html/header.php";
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">add
-                        Products</button>
-                    <span><?= @$error ?></span>
+                    <form method="post">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">add
+                            Products</button>
+                        <span style="color:red"><?= @$productError . "<br>" ?></span>
+                        <span style="color:red"><?= @$priceError . "<br>" ?></span>
+                        <span style="color:red"><?= @$quantityError ?></span>
                 </div>
 
                 <div class="card-body">
@@ -57,8 +72,10 @@ include "html/header.php";
                                             class="btn btn-sm btn-info">view</a>
                                         <a href="add-product.php?updateID=<?= $product['id'] ?>"
                                             class="btn btn-sm btn-dark">update</a>
-                                        <a href="add-product.php?deleteID=<?= $product['id'] ?>"
-                                            class="btn btn-sm btn-danger">delete</a>
+                                        <form method="post">
+                                            <input type="hidden" name="productId" value="<?= $product['productName'] ?>" />
+                                            <input type="submit" class="btn btn-sm btn-danger" value="delete">
+                                        </form>
                                         <!-- <form action="" method="get"><input type="submit" value="delete"
                                                 name="delete //$user["id"] "></form> -->
                                     </td>
@@ -75,7 +92,7 @@ include "html/header.php";
                         <tfoot>
                             <tr>
                                 <td colspan="5"> total products</td>
-                                <td> <?= getLastId("storage/products.json") ?></td>
+                                <td> <?= getAllProduct() ?></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -104,30 +121,30 @@ include "html/header.php";
 
                     <div class="user-box">
                         <label>product name</label>
-                        <input type="text" name="productname" class="form-control" required>
+                        <input type="text" name="productName" class="form-control" required>
 
                     </div>
                     <div class="user-box">
                         <label>price</label>
-                        <input type="text" class="form-control" name="price">
+                        <input type="text" class="form-control" name="price" required>
 
                     </div>
                     <div class="user-box">
                         <label>quantaty</label>
-                        <input type="text" class="form-control" name="quantity">
+                        <input type="text" class="form-control" name="quantity" requierd>
 
                     </div>
                     <div class="user-box">
                         <label>country</label>
-                        <input type="text" name="country" class="form-control" placeholder="apain">
+                        <input type="text" name="country" class="form-control" placeholder="egypt">
 
                     </div>
-                    <input type="submit" value="add" class="btn btn-primary mt-2 float-center">
+                    <input type="submit" value="add" class="btn btn-success mt-2 float-center">
                 </form>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
         </div>
     </div>
 

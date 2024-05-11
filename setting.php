@@ -18,6 +18,9 @@ if (isset($_POST['password'])) {
 }
 if (isset($_POST['userauth'])) {
     $usernameAuth = $_POST['userauth'];
+    if (!setManager($usernameAuth)) {
+        $userAuthError = $usernameAuth . " is already a manager";
+    }
     setManager($usernameAuth);
 }
 
@@ -63,6 +66,7 @@ include "html/header.php";
                 <?php }
                 ?>
             </select>
+            <span style="color:red"><?= @$userAuthError ?></span>
             <div class="d-flex justify-content-center mt-2">
                 <input type="submit" class="btn btn-success mt-3 " value="set Manager">
             </div>

@@ -1,18 +1,23 @@
 <?php
-include "parent.php";
+include "verify.php";
 
-function addProduct($name, $price , $quantaty , $country= "spain")
+function addProduct($name, $price, $quantaty, $country = "egypt")
 {
     $products = getAllData("storage/products.json");
     $id = getLastId("storage/products.json") + 1;
-    if (isExist($name, "productName", "storage/products.json")) {
-        return false;
-    } elseif ($price < 0 && $quantaty < 0) {
-        return false;
-    }
     $products[] = ["id" => $id, "productName" => $name, "price" => $price, "quantity" => $quantaty, "country" => $country];
     file_put_contents("storage/products.json", json_encode($products, JSON_PRETTY_PRINT));
-    $news = $name . " has been added successfully ";
+    $news = $name . " product has been added successfully ";
     addNews($news);
 
+}
+
+function getAllProduct()
+{
+    $counter = 0;
+    $allData = getAllData("storage/products.json");
+    foreach ($allData as $one) {
+        $counter += 1;
+    }
+    return $counter;
 }

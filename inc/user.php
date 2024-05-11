@@ -30,7 +30,6 @@ function addUser($username, $email, $password, $user = "admin")
 {
     $username = clearInput($username);
     $email = clearInput($email);
-    $password = clearInput($password);
     $users = getAllData("storage/users.json");
     $id = getLastId("storage/users.json") + 1;
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -40,8 +39,9 @@ function addUser($username, $email, $password, $user = "admin")
     addNews($news);
 }
 
-// fucntion to login
-function loginUser($username, $password)
+// script to login and create session for username and user authonication
+
+function login($username, $password)
 {
     if (isUserExist($username)) {
         $user = getUser($username);
@@ -103,17 +103,19 @@ function resetPassword($password, $coPassword)
 function setManager($username)
 {
     if (isUserExist($username)) {
-        $user = getUser($username);
-        $user = $user['user'];
-        if ($user == "manager") {
-            return false;
+        $users = getAllData("storage/users.json");
+        foreach ($users as $user) {
+            if ($user['username'] == $username) {
+                if ($user['user'] == "manager") {
+                    return false;
+                }
+                $user['user'] = "manager";
+            }
         }
-
-        $user['user'] = "manager";
+        file_put_contents("storage/users.json", json_encode($users, JSON_PRETTY_PRINT));
+        $news = $username . "  is a manager now, give him some respect ";
+        addNews($news);
         return true;
-
     }
-
     return false;
 }
-
